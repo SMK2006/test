@@ -18,7 +18,6 @@ let frames = [
   "https://codepen.io/cobra_winfrey/debug/RwWYGxj"
 ];
 
-// Load iFrames on demand & remove after modal is closed to reduce weight & smooth out transitions
 
 
 let cards = document.getElementsByClassName("inner");
@@ -154,6 +153,33 @@ function refresh() {
 
 window.addEventListener("resize", refresh);
 
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Check if this is the user's first visit
+  if (!localStorage.getItem('visited')) {
+      // Set a flag to indicate that the user has visited
+      localStorage.setItem('visited', 'true');
+
+      // Attach a click event listener to the document
+      document.addEventListener('click', function () {
+          // Start background music when the user interacts (clicks)
+          startBackgroundMusic();
+
+          // Remove the click event listener to prevent multiple plays
+          document.removeEventListener('click', arguments.callee);
+      });
+  }
+});
+
+function startBackgroundMusic() {
+  var backgroundMusic = document.getElementById('backgroundMusic');
+
+  // Check if the audio element is supported
+  if (backgroundMusic && typeof backgroundMusic.play === 'function') {
+      // Start playing the background music
+      backgroundMusic.play();
+  }
+}
 
 
 
